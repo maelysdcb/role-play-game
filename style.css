@@ -1,0 +1,276 @@
+* {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+  scrollbar-color: #122531 #2f525a;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-image: url("./img/sword.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body::-webkit-scrollbar {
+  width: 15px;
+}
+
+body::-webkit-scrollbar-track {
+  background: #122531;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #2f525a;
+  border-radius: 1em;
+}
+
+main {
+  width: 77%;
+  margin: auto;
+  display: grid;
+  padding: 80px 0;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  grid-template-areas:
+    "section-4 section-1 section-1"
+    "section-3 section-3 section-2";
+  gap: 2.5em;
+}
+
+h1 {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+section {
+  width: 100%;
+  border-radius: 1em;
+  color: white;
+  padding: 40px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(7px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* GAME */
+#section-1 {
+  grid-area: section-1;
+  border-radius: 1em;
+}
+
+.game {
+  padding-top: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.gameBox {
+  display: flex;
+  gap: 4em;
+  width: 100%;
+}
+
+.caracters {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#player,
+#enemy {
+  width: 50%;
+}
+
+img#girl {
+  width: 30%;
+}
+
+img#witcher {
+  width: 25%;
+}
+
+.game p {
+  padding-bottom: 0.4em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* INVENTORY */
+#section-2 {
+  grid-area: section-2;
+}
+
+#section-2 .inventory ul {
+  margin-top: 1em;
+  list-style-type: none;
+}
+
+#section-2 .inventory ul li {
+  padding: 5px 0;
+}
+
+#section-2 .inventory ul li span {
+  font-weight: 600;
+  color: white;
+}
+
+/* HISTORIC LOGGER */
+#section-3 {
+  height: 100%;
+  background: rgba(13, 28, 24, 0.45);
+  grid-area: section-3;
+}
+
+#section-3 .log {
+  padding-top: 1em;
+  overflow-y: scroll;
+  height: 100px;
+  scrollbar-color: #afca3e #0d1b18;
+  scroll-behavior: smooth;
+}
+
+.log::-webkit-scrollbar {
+  width: 15px;
+}
+
+.log::-webkit-scrollbar-track {
+  background: #0d1b18;
+  border-radius: 20px;
+}
+
+.log::-webkit-scrollbar-thumb {
+  background-color: #afca3e;
+  border-radius: 20px;
+}
+
+/* ACTIONS */
+#section-4 {
+  grid-area: section-4;
+}
+
+#player > span,
+#enemy > span {
+  display: inline-block;
+  padding-bottom: 0.3em;
+  font-size: 35px;
+}
+
+.healthbarBack {
+  border-radius: 2em;
+  height: 35px;
+  border: 3px ridge rgba(255, 255, 255, 0.8);
+  background: #0d1b18;
+}
+
+.healthbar {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 2em;
+  height: 35px;
+  transition: 0.2s ease-in-out;
+}
+
+.healthbar span {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+#player,
+#enemy {
+  padding: 10px;
+}
+
+.bouton {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 2em 0;
+  gap: 2em;
+}
+
+button {
+  width: 130px;
+  height: 50px;
+  border-radius: 2em;
+  padding: 10px;
+  transition: 0.1s;
+  background: rgba(0, 0, 0, 0.051);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 2px 4px 5px 2px rgba(0, 0, 0, 0.5);
+}
+
+button:hover {
+  cursor: pointer;
+  border: none;
+  background: #f0542d;
+  transform: scale(0.94);
+  font-weight: 600;
+}
+
+.bouton button span {
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+footer p {
+  text-align: center;
+  font-weight: 300;
+  color: white;
+}
+
+/* DETAILS */
+
+button#playPause {
+  width: 50px;
+  font-size: 15px;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 1024px) {
+  main {
+    width: 90%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "section-4 section-1"
+      "section-3 section-2";
+    padding: 40px 0;
+  }
+}
+
+@media screen and (max-width: 899px) {
+  main {
+    padding: 35px 0 0 0;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "section-1"
+      "section-4"
+      "section-2";
+    gap: 1em;
+  }
+  #section-3,
+  #section-2 {
+    display: none;
+  }
+  #player > span,
+  #enemy > span {
+    font-size: 25px;
+  }
+  button[onclick="reset2()"],
+  button[onclick="stealLife()"],
+  button[onclick="comboAttack(3)"] {
+    display: none;
+  }
+  footer p {
+    font-size: 13px;
+  }
+}
