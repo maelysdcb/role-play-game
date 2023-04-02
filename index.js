@@ -14,10 +14,20 @@ function log(message) {
 }
 
 // AI - GAME AUTOMATISATION
+function turnToEnemy() {
+  if (enemyLife > 0) {
+    setTimeout(function () {
+      enemyAttacks(), disabledButtons();
+    }, 700);
+  } else {
+    endGame();
+  }
+}
+
 function enemyAttacks(random) {
   let attacks = ["punch", "sword", "fireball"];
   random = attacks[Math.floor(Math.random() * attacks.length)];
-  if (enemyLife > 0) {
+  if (playerLife > 0) {
     switch (random) {
       case "punch":
         playerLife -= 10;
@@ -38,118 +48,89 @@ function enemyAttacks(random) {
         );
         break;
     }
-  }
-  updateLife();
-}
-
-// Function TURN TO ENEMY
-function turnToEnemy() {
-  if (enemyLife > 0) {
-    setTimeout(function () {
-      enemyAttacks(), disableButtons();
-    }, 600);
-  } else {
-    reset();
+    updateLife();
   }
 }
 
 // DISABLED BUTTONS
-let actionButtons = document.querySelectorAll("button");
-function disableButtons() {
-  for (let i = 0; i < actionButtons.length; i++) {
-    if (actionButtons[i].disabled) {
-      actionButtons[i].disabled = false;
-      actionButtons[i].style.backgroundColor = "";
+let playButtons = document.querySelectorAll("button");
+function disabledButtons() {
+  for (let i = 0; i < 5; i++) {
+    if (playButtons[i].disabled) {
+      playButtons[i].disabled = false;
+      playButtons[i].style.backgroundColor = "";
     } else {
-      actionButtons[i].disabled = true;
-      actionButtons[i].style.backgroundColor = "rgba(180, 180, 180, 0.3)";
+      playButtons[i].disabled = true;
+      playButtons[i].style.backgroundColor = "rgba(180, 180, 180, 0.3)";
     }
   }
 }
 
 // ATTACK PUNCH
 function attackWithHands() {
-  enemyLife -= 10;
-  let punch = document.getElementById("punch");
-  punch.play();
+  if (playerLife > 0) {
+    enemyLife -= 10;
+    let punch = document.getElementById("punch");
+    punch.play();
 
-  if (enemyLife <= 0) {
-    enemyLife = 0;
-    reset();
+    if (enemyLife <= 0) {
+      enemyLife = 0;
+      updateLife();
+    } else {
+      log(
+        `<pre style='color:#d3e876;'>PUNCH ! Enemy life is now at <strong>${enemyLife}hp</strong></pre>`
+      );
+    }
     updateLife();
-    return true;
+    turnToEnemy();
+    disabledButtons();
   } else {
-    log(
-      `<pre style='color:#d3e876;'>PUNCH ! Enemy life is now at <strong>${enemyLife}hp</strong></pre>`
-    );
+    endGame();
   }
-  updateLife();
-  turnToEnemy();
-  disableButtons();
-  return false;
 }
-
-// COMBO ATTACK X3
-// function comboAttack(nbHits) {
-//   let isEnemyDead = false;
-//   let combo = document.getElementById("combo");
-//   combo.play();
-//   do {
-//     log(`<pre style='color:#d3e876;'>COMBO X3</pre>`);
-//     isEnemyDead = attackWithHands();
-//     nbHits--;
-//   } while (nbHits > 0 && !isEnemyDead);
-// }
 
 // ATTACK WITH SWORD
 function attackWithSword() {
-  let sword = document.getElementById("sword");
-  sword.play();
-  enemyLife -= 20;
-  if (enemyLife <= 0) {
-    enemyLife = 0;
-    reset();
+  if (playerLife > 0) {
+    let sword = document.getElementById("sword");
+    sword.play();
+    enemyLife -= 20;
+    console.log(enemyLife);
+
+    if (enemyLife <= 0) {
+      enemyLife = 0;
+    }
+    log(
+      `<pre style='color:#d3e876;'>SWING ! Enemy life is now at <strong>${enemyLife} hp</strong></pre>`
+    );
+    updateLife();
+    turnToEnemy();
+    disabledButtons();
+  } else {
+    endGame();
   }
-  log(
-    `<pre style='color:#d3e876;'>SWING ! Enemy life is now at <strong>${enemyLife} hp</strong></pre>`
-  );
-  updateLife();
-  turnToEnemy();
-  disableButtons();
 }
 
 // FIREBALL
 function fireBall() {
-  enemyLife = Math.floor(enemyLife / 2);
-  let fireSpell = document.getElementById("fireball");
-  fireSpell.play();
-  if (enemyLife <= 0) {
-    reset();
-  } else {
-    log(
-      `<pre style='color:#d3e876;'>Incredible ! Enemy's life is now at <strong>${enemyLife} hp</strong></pre>`
-    );
-  }
-  updateLife();
-  turnToEnemy();
-  disableButtons();
-}
+  if (playerLife > 0) {
+    enemyLife = Math.floor(enemyLife / 2);
+    let fireSpell = document.getElementById("fireball");
+    console.log(enemyLife);
 
-// ENEMY ATTACK
-// function enemyAttack() {
-//   playerLife -= 40;
-//   let playerGrunts = document.getElementById("playerGrunts");
-//   playerGrunts.play();
-//   if (playerLife <= 0) {
-//     playerLife = 0;
-//     reset();
-//   } else {
-//     log(
-//       `<pre>Enemy attacked ! Your life is now at <strong>${playerLife} hp</strong></pre>`
-//     );
-//   }
-//   updateLife();
-// }
+    fireSpell.play();
+    if (enemyLife <= 0) {
+    } else {
+      log(
+        `<pre style='color:#d3e876;'>Incredible ! Enemy's life is now at <strong>${enemyLife} hp</strong></pre>`
+      );
+    }
+    updateLife();
+    turnToEnemy();
+    disabledButtons();
+  }
+  endGame();
+}
 
 // STEAL LIFE
 // function stealLife() {
@@ -183,9 +164,6 @@ function takePotion(p) {
     bigPotion--;
     nbPotionStock--;
     playerLife += p;
-    console.log(bigPotion);
-    console.log(smallPotion);
-    console.log(playerLife);
   } else if (bigPotion == 0 && p == 30) {
     alert("No maxi potions anymore");
   }
@@ -249,46 +227,36 @@ function updateLife() {
 updateLife();
 
 // GAME OVER
-function reset() {
-  if (playerLife == 0) {
+function endGame() {
+  if (playerLife <= 0) {
+    playerLife = 0;
+    log(`<pre>You LOSE ! Press replay</pre>`);
+  } else if (enemyLife <= 0) {
+    enemyLife = 0;
+    log(`<pre>You WIN ! Press replay</pre>`);
+  }
+}
+
+// RESET BUTTON
+function replay() {
+  if (playerLife < 100 || nbPotionStock > 0) {
     playerLife = 100;
     enemyLife = 100;
     smallPotion = 2;
     bigPotion = 2;
     nbPotionStock = smallPotion + bigPotion;
-    alert("You lose ❌ Press OK to restart !");
-  } else if (enemyLife == 0) {
+  } else if (enemyLife < 100) {
     enemyLife = 100;
     playerLife = 100;
     smallPotion = 2;
     bigPotion = 2;
     nbPotionStock = smallPotion + bigPotion;
-    alert("You win ! 🥇 Press OK to restart !");
   }
   logger.innerHTML = ``;
   updateLife();
   updatePotions();
+  disabledButtons();
 }
-
-// RESET BUTTON
-// function reset2() {
-//   if (playerLife < 100 || nbPotionStock > 0) {
-//     playerLife = 100;
-//     enemyLife = 100;
-//     smallPotion = 2;
-//     bigPotion = 2;
-//     nbPotionStock = smallPotion + bigPotion;
-//   } else if (enemyLife < 100) {
-//     enemyLife = 100;
-//     playerLife = 100;
-//     smallPotion = 2;
-//     bigPotion = 2;
-//     nbPotionStock = smallPotion + bigPotion;
-//   }
-//   logger.innerHTML = ``;
-//   updateLife();
-//   updatePotions();
-// }
 
 // MUSIC
 function playStop() {
