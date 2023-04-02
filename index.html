@@ -56,28 +56,28 @@
     </section>
     <section id="section-4">
       <h2>🎮 Actions : </h2>
-      <div class="bouton">
+      <div class="playButton">
         <button onclick="attackWithHands()"><span>Punch 👊</span></button>
-        <button onclick="comboAttack(3)"><span>Combo 💪</span></button>
+        <!-- <button onclick="comboAttack(3)"><span>Combo 💪</span></button> -->
         <button onclick="attackWithSword()"><span>Sword ⚔️</span></button>
         <button onclick="fireBall()"><span>Fireball 🔥</span></button>
-        <button onclick="enemyAttack()"><span>👹</span></button>
-        <button onclick="stealLife()"><span>Steal life ✨</span></button>
+        <!-- <button onclick="enemyAttack()"><span>👹</span></button> -->
+        <!-- <button onclick="stealLife()"><span>Steal life ✨</span></button> -->
         <button onclick="takePotion(10)"><span>Mini 🍸</span></button>
         <button onclick="takePotion(30)"><span>Maxi 🍺</span></button>
-        <button onclick="reset2()"> <span>Reset 🔄</span></button>
-        <div id="othersActions">
-          <audio src="./audio/punch.mp3" id="punch"></audio>
-          <audio src="./audio/bigPunch.mp3" id="combo"></audio>
-          <audio src="./audio/sword.mp3" id="sword"></audio>
-          <audio src="./audio/fireball.mp3" id="fireball"></audio>
-          <audio src="./audio/stealLife.mp3" id="stealLife"></audio>
-          <audio src="./audio/miniPotions.mp3" id="miniPotions"></audio>
-          <audio src="./audio/bigPotions.mp3" id="maxiPotions"></audio>
-          <audio src="./audio/femaleGrunts.mp3" id="playerGrunts"></audio>
-          <audio src="./audio/soundback.mp3" id="track"></audio>
-          <button onclick="playStop()" id="playPause">🔊</button>
-        </div>
+        <!-- <button onclick="reset2()"> <span>Reset 🔄</span></button> -->
+        <button onclick="playStop()" id="playPause">🔊</button>
+      </div>
+      <div id="othersActions">
+        <audio src="./audio/punch.mp3" id="punch"></audio>
+        <!-- <audio src="./audio/bigPunch.mp3" id="combo"></audio> -->
+        <audio src="./audio/sword.mp3" id="sword"></audio>
+        <audio src="./audio/fireball.mp3" id="fireball"></audio>
+        <!-- <audio src="./audio/stealLife.mp3" id="stealLife"></audio> -->
+        <audio src="./audio/miniPotions.mp3" id="miniPotions"></audio>
+        <audio src="./audio/bigPotions.mp3" id="maxiPotions"></audio>
+        <audio src="./audio/femaleGrunts.mp3" id="playerGrunts"></audio>
+        <audio src="./audio/soundback.mp3" loop ="loop" id="track"></audio>
       </div>
     </section>
   </main>
