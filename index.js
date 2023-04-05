@@ -17,9 +17,10 @@ function log(message) {
 function turnToEnemy() {
   if (enemyLife > 0) {
     setTimeout(function () {
-      enemyAttacks(), disabledButtons();
-    }, 700);
+      enemyAttacks();
+    }, 800);
   } else {
+    playerLife = 0;
     endGame();
   }
 }
@@ -48,42 +49,57 @@ function enemyAttacks(random) {
         );
         break;
     }
-    updateLife();
+    togglebuttons(false);
+  } else {
+    console.log("coucou");
+    playerLife = 0;
+    endGame();
   }
+  updateLife();
+}
+// DISABLED BUTTONS
+function togglebuttons(b) {
+  let buttons = document.querySelectorAll(".play");
+  buttons.forEach(function (button) {
+    button.disabled = b;
+    if ((button.disabled = b)) {
+      button.style.backgroundColor = "rgba(180, 180, 180, 0.3)";
+    } else {
+      button.style.backgroundColor = "";
+    }
+  });
 }
 
-// DISABLED BUTTONS
-let playButtons = document.querySelectorAll("button");
-function disabledButtons() {
-  for (let i = 0; i < 5; i++) {
-    if (playButtons[i].disabled) {
-      playButtons[i].disabled = false;
-      playButtons[i].style.backgroundColor = "";
-    } else {
-      playButtons[i].disabled = true;
-      playButtons[i].style.backgroundColor = "rgba(180, 180, 180, 0.3)";
-    }
-  }
-}
+// let playButtons = document.querySelectorAll("button");
+// function disabledButtons() {
+//   for (let i = 0; i < 5; i++) {
+//     if (playButtons[i].disabled) {
+//       playButtons[i].disabled = false;
+//       playButtons[i].style.backgroundColor = "";
+//     } else {
+//       playButtons[i].disabled = true;
+//       playButtons[i].style.backgroundColor = "rgba(180, 180, 180, 0.3)";
+//     }
+//   }
+// }
 
 // ATTACK PUNCH
 function attackWithHands() {
-  if (playerLife > 0) {
+  if (enemyLife > 0) {
     enemyLife -= 10;
     let punch = document.getElementById("punch");
     punch.play();
 
     if (enemyLife <= 0) {
       enemyLife = 0;
-      updateLife();
     } else {
       log(
         `<pre style='color:#d3e876;'>PUNCH ! Enemy life is now at <strong>${enemyLife}hp</strong></pre>`
       );
     }
     updateLife();
-    turnToEnemy();
-    disabledButtons();
+    setTimeout(turnToEnemy(), 1000);
+    togglebuttons(true);
   } else {
     endGame();
   }
@@ -91,7 +107,7 @@ function attackWithHands() {
 
 // ATTACK WITH SWORD
 function attackWithSword() {
-  if (playerLife > 0) {
+  if (enemyLife > 0) {
     let sword = document.getElementById("sword");
     sword.play();
     enemyLife -= 20;
@@ -104,8 +120,8 @@ function attackWithSword() {
       `<pre style='color:#d3e876;'>SWING ! Enemy life is now at <strong>${enemyLife} hp</strong></pre>`
     );
     updateLife();
-    turnToEnemy();
-    disabledButtons();
+    setTimeout(turnToEnemy(), 1000);
+    togglebuttons(true);
   } else {
     endGame();
   }
@@ -113,7 +129,7 @@ function attackWithSword() {
 
 // FIREBALL
 function fireBall() {
-  if (playerLife > 0) {
+  if (enemyLife > 0) {
     enemyLife = Math.floor(enemyLife / 2);
     let fireSpell = document.getElementById("fireball");
     console.log(enemyLife);
@@ -126,10 +142,11 @@ function fireBall() {
       );
     }
     updateLife();
-    turnToEnemy();
-    disabledButtons();
+    setTimeout(turnToEnemy(), 1000);
+    togglebuttons(true);
+  } else {
+    endGame();
   }
-  endGame();
 }
 
 // STEAL LIFE
@@ -255,7 +272,7 @@ function replay() {
   logger.innerHTML = ``;
   updateLife();
   updatePotions();
-  disabledButtons();
+  togglebuttons(false);
 }
 
 // MUSIC
