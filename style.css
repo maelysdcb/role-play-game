@@ -27,10 +27,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 main {
-  width: 77%;
-  margin: auto;
   display: grid;
-  padding: 80px 0;
+  margin:2em;
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
     "section-4 section-1 section-1"
@@ -187,15 +185,19 @@ img#witcher {
 }
 
 .playButton {
-  width: 100%;
+  margin-top: 1em;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  margin: 2em 0;
-  gap: 2em;
+  gap:3em;
+}
+
+.actionsBtn1 {
+  display: flex;
+  flex-direction: column;
 }
 
 button {
+  margin: 1em 0;
   width: 130px;
   height: 50px;
   border-radius: 2em;
@@ -234,28 +236,18 @@ button#playPause {
 
 /* MEDIA QUERIES */
 
-/* @media screen and (max-width: 1024px) {
-  main {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-areas:
-      "section-4 section-1"
-      "section-3 section-2";
-    padding: 40px 0;
-  }
-} */
-
 @media screen and (max-width: 899px) {
   main {
-    width: 90%;
     grid-template-columns: 1fr;
     grid-template-areas:
       "section-1"
       "section-4"
-      "section-2";
+      "section-2"
+      "section-3";
   }
 
   section {
-    padding: 0;
+    padding: 1em;
   }
   .gameBox {
     flex-direction: column;
@@ -265,11 +257,6 @@ button#playPause {
   #enemy {
     width: 100%;
     box-sizing: border-box;
-  }
-
-  #section-3,
-  #section-2 {
-    display: none;
   }
   #player > span,
   #enemy > span {

@@ -57,14 +57,18 @@
     <section id="section-4">
       <h2>🎮 Actions : </h2>
       <div class="playButton">
-        <button class="play" onclick="attackWithHands()"><span>Punch 👊</span></button>
-        <button class="play" onclick="attackWithSword()"><span>Sword ⚔️</span></button>
-        <button class="play" onclick="fireBall()"><span>Fireball 🔥</span></button>
-        <!-- <button onclick="stealLife()"><span>Steal life ✨</span></button> -->
-        <button class="play" onclick="takePotion(10)"><span>Mini 🍸</span></button>
-        <button class="play" onclick="takePotion(30)"><span>Maxi 🍺</span></button>
-        <button onclick="replay()" id="replay"> <span>Replay 🔄</span></button>
-        <button onclick="playStop()" id="playPause">🔊</button>
+        <div class="actionsBtn1">
+          <button class="play" onclick="attackWithHands()"><span>Punch 👊</span></button>
+          <button class="play" onclick="attackWithSword()"><span>Sword ⚔️</span></button>
+          <button class="play" onclick="fireBall()"><span>Fireball 🔥</span></button>
+          <!-- <button onclick="stealLife()"><span>Steal life ✨</span></button> -->
+          <button onclick="playStop()" id="playPause">🔊</button>
+        </div>
+        <div class="actionsBtn1">
+          <button class="play" onclick="takePotion(10)"><span>Mini 🍸</span></button>
+          <button class="play" onclick="takePotion(30)"><span>Maxi 🍺</span></button>
+          <button onclick="replay()" id="replay"> <span>Replay 🔄</span></button>
+        </div>
       </div>
       <div id="othersActions">
         <audio src="./audio/punch.mp3" id="punch"></audio>
@@ -78,7 +82,7 @@
     </section>
   </main>
   <footer>
-    <p>&copy;Equ6l 2023 | credits to @minimoss</p>
+    <p>&copy;maelysdcb 2023 | credits to @minimoss</p>
   </footer>
   <script src="index.js"></script>
 </body>
